@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+test
+<a target="_blank" href="https://www.daum.net">이동1!!</a>
+<a href="https://www.daum.net">이동2!!</a>
+<img style="height:50px;" src="/uploadfile/1706141018736_file.jpg" />
+!!!!
+
+<a target="_blank" href="/download/1706141018736_file.jpg">다운로드 테스트</a>
+//1706141018736_file.jpg
+<div class="div_test">test length1</div>
+<div class="div_test">test length2</div>
+<div class="div_test">test length3</div>
+<div class="div_test">test length4</div>
+<!--=><div class="">test length4</div>-->
+<script>
+    let div_test = $(".div_test");
+    //alert(div_test.length);
+    for(let i=0;i<div_test.length;i++){
+        let each = $(div_test[i]);
+        $(div_test[i]).text(i + "!!!");
+        //$(div_test[i]).remove();
+        $(div_test[i]).removeClass("div_test");
+        //alert(each.html());
+    }
+
+    div_test = $(".div_test");
+    //alert(div_test.length);
+</script>
+
+<!--
+<input type="file" onchange="readURLFile(this)" accept="image/*" />
+-->
+<input type="file" onchange="readURLFile(this)" />
+<div class="row" id="div_array_tbbrdpic">
+    <!--
+    <div class="form-group col-md-2">
+        <img class="img-fluid" src="https://jiksang-user-pub.s3.ap-northeast-2.amazonaws.com/jiksang/1694624076672_1de279d0e5ca4c14b3e344f3a244beb0_file.jpg" />
+    </div>
+    -->
+</div>
+<script>
+    let limit_each_file_size = 10;
+    function readURLFile(input) {
+        //let temp_id = $(input).attr("id") + "";
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                let temp_each_file_size = input.files[0].size / (1024 * 1024);
+                if (temp_each_file_size > limit_each_file_size) {
+                    alert("파일 1개 당 " + limit_each_file_size + "mb 용량 제한 초과 입니다!");
+                    $(input).val("");
+                    return false;
+                }
+                listener_upload_file(input.files[0]);
+                /*
+                if (!input.files[0].type.match('image.*')) {
+                    //alert(input.files[0].type);
+                    alert("이미지 파일이 아닙니다!");
+                    $(input).val(null);
+                    //$('#img_' + temp_id).attr('src', "/resources/image/no-pic.jpg");
+                } else {
+                    listener_upload_file(input.files[0]);
+                }
+
+                 */
+            }
+        }
+    }
+    function listener_upload_file(obj_file) {
+        let fileData = new FormData();
+        fileData.append("file", obj_file);
+
+        $.ajax({
+            url: "/api/default/uploadFile",
+            type: "POST",
+            data: fileData ,
+            cache : false,
+            contentType : false,
+            processData : false,
+            success: (data, status, xhr)=>{
+                //alert(xhr.status);
+                switch(xhr.status){
+                    case 201:
+                        //alert(data);
+                        $("#div_array_tbbrdpic").append(
+                            '<div class="">'
+                        +'<img class="img-fluid" style="height:100px;" src="'+data+'"/>'
+                            // argergae.png
+                            /*<a target="_blank" href="/download/1706141018736_file.jpg">다운로드 테스트</a>
+                        /uploadfile/ => /download/*/
+                        +'<a class="a_thisisdownload" target="_blank" href="'+data+'">다운로드</a>'
+                        +'<input class="input_tbbrdpic hide" value="'+data+'"/>'
+                        +'<a onClick="$(this).parent().remove();">삭제</a>'
+                            +'</div>'
+                        );
+
+                        let a_thisisdownload = $(".a_thisisdownload");
+                        //a_thisisdownload 클래스 가진 애들 배열로 가져오기!
+                        for(let i = 0;i<a_thisisdownload.length;i++){
+                            //a_thisisdownload 클래스 가진 애들 하나씩 접근 가능!
+                            let a_thisisdownload_href = $(a_thisisdownload[i]).attr("href");
+                            // /uploadfile/~~~~
+                            a_thisisdownload_href = a_thisisdownload_href.replace("uploadfile/", "download/");
+                            $(a_thisisdownload[i]).attr("href", a_thisisdownload_href);
+                            $(a_thisisdownload[i]).removeClass("a_thisisdownload");
+                        }
+
+                        break;
+                    default:
+                        console.log("no matching status code");
+                }
+            },
+            error: (data)=>{
+                switch(data.status){
+                    case 500:
+                        alert("권한 외의 요청입니다.");
+                        location.href="/index";
+                        break;
+                    default:
+                        alert("네트워크 에러가 발생하였습니다. 다시 요청해주시기 바랍니다.");
+                        console.log("no matching status code");
+                        break;
+                }
+            },
+        });
+    }
+</script>
+</body>
+</html>
