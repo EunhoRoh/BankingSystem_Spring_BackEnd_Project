@@ -1,13 +1,13 @@
-package com.thc.sprapi.mapper;
+package com.eunho.bankingsystem_spring_v2.mapper;
 
-import com.thc.sprapi.dto.TbpicDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkpicDto;
 
 import java.util.List;
 
-public interface TbpicMapper {
-	TbpicDto.TbpicSelectDto detail(String id);
-	List<TbpicDto.TbpicSelectDto> list(TbpicDto.TbpicListDto params);
-	List<TbpicDto.TbpicSelectDto> moreList(TbpicDto.TbpicMoreListDto params);
-	List<TbpicDto.TbpicSelectDto> pagedList(TbpicDto.TbpicPagedListDto params);
-	int pagedListCount(TbpicDto.TbpicPagedListDto params);
+public interface BkpicMapper {
+	BkpicDto.BkpicSelectDto detail(String id);
+	List<BkpicDto.BkpicSelectDto> list(BkpicDto.BkpicListDto params);
+	List<BkpicDto.BkpicSelectDto> moreList(BkpicDto.BkpicMoreListDto params);
+	List<BkpicDto.BkpicSelectDto> pagedList(BkpicDto.BkpicPagedListDto params);
+	int pagedListCount(BkpicDto.BkpicPagedListDto params);
 }

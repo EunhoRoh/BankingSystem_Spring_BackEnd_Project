@@ -15,11 +15,11 @@
 </div>
 
 
-<a onclick="list_tbuser()">list</a>
+<a onclick="list_bkuser()">list</a>
 <script>
-    function list_tbuser(){
+    function list_bkuser(){
         $.ajax({
-            url: "/api/tbuser/list",
+            url: "/api/bkuser/list",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

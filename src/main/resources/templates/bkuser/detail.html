@@ -17,11 +17,11 @@
 제목<div id="div_title">-</div>
 내용<div id="div_content">-</div>
 
-<a onclick="detail_tbuser()">select</a>
+<a onclick="detail_bkuser()">select</a>
 <script>
-    function detail_tbuser(){
+    function detail_bkuser(){
         $.ajax({
-            url: "/api/tbuser/" + $("#detail_id").val(),
+            url: "/api/bkuser/" + $("#detail_id").val(),
             type: "GET",
             contentType : 'application/json; charset=utf-8',
             cache: false,
@@ -35,9 +35,9 @@
         });
 
     }
-    function create_tbuser(){
+    function create_bkuser(){
         $.ajax({
-            url: "/api/tbuser",
+            url: "/api/bkuser",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

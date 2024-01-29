@@ -1,13 +1,13 @@
-package com.thc.sprapi.repository;
+package com.eunho.bankingsystem_spring_v2.repository;
 
-import com.thc.sprapi.domain.Tbuser;
+import com.eunho.bankingsystem_spring_v2.domain.Bkuser;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface TbuserRepository extends JpaRepository<Tbuser, String> {
-    Tbuser findByUsername(String username);
-    @EntityGraph(attributePaths = {"tbuserRoleType.roleType"})
-    Optional<Tbuser> findEntityGraphRoleTypeById(String id);
+public interface BkuserRepository extends JpaRepository<Bkuser, String> {
+    Bkuser findByUsername(String username);
+    @EntityGraph(attributePaths = {"bkuserRoleType.roleType"})
+    Optional<Bkuser> findEntityGraphRoleTypeById(String id);
 }

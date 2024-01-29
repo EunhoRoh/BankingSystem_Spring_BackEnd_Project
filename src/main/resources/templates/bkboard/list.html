@@ -14,12 +14,13 @@
     =========================================
 </div>
 
-
-<a onclick="list_tbboard()">list</a>
+//
+<a onclick="list_bkboard()">list</a>
 <script>
-    function list_tbboard(){
+    // 검색한 list를 보여주는거야
+    function list_bkboard(){
         $.ajax({
-            url: "/api/tbboard/list",
+            url: "/api/bkboard/list",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

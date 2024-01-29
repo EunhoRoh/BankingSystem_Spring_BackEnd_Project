@@ -1,13 +1,13 @@
-package com.thc.sprapi.mapper;
+package com.eunho.bankingsystem_spring_v2.mapper;
 
-import com.thc.sprapi.dto.TbuserDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkuserDto;
 
 import java.util.List;
 
-public interface TbuserMapper {
-	TbuserDto.TbuserSelectDto detail(String id);
-	List<TbuserDto.TbuserSelectDto> list(TbuserDto.TbuserListDto params);
-	List<TbuserDto.TbuserSelectDto> moreList(TbuserDto.TbuserMoreListDto params);
-	List<TbuserDto.TbuserSelectDto> pagedList(TbuserDto.TbuserPagedListDto params);
-	int pagedListCount(TbuserDto.TbuserPagedListDto params);
+public interface BkuserMapper {
+	BkuserDto.BkuserSelectDto detail(String id);
+	List<BkuserDto.BkuserSelectDto> list(BkuserDto.BkuserListDto params);
+	List<BkuserDto.BkuserSelectDto> moreList(BkuserDto.BkuserMoreListDto params);
+	List<BkuserDto.BkuserSelectDto> pagedList(BkuserDto.BkuserPagedListDto params);
+	int pagedListCount(BkuserDto.BkuserPagedListDto params);
 }

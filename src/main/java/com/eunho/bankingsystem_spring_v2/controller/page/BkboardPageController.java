@@ -1,23 +1,29 @@
-package com.thc.sprapi.controller.page;
+package com.eunho.bankingsystem_spring_v2.controller.page;
 
-import com.thc.sprapi.dto.TbboardDto;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/tbboard")
+
+//bkboard의 페이지 url
+// /bkboard
+@RequestMapping("/bkboard")
 @Controller
-public class TbboardPageController {
+public class BkboardPageController {
+    
+    ///bkboard/{page}
+    // page를 url value 값으로 받네.
     @GetMapping("/{page}")
     public String page(@PathVariable("page") String page){
-        return "/tbboard/" + page;
+        return "/bkboard/" + page;
     }
+    
+    // /bkboard/detail/{id}
+    // bkboard {id}를 bkboard url로 받네
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") String id){
-        return "/tbboard/detail";
+        return "/bkboard/detail";
     }
 
 }

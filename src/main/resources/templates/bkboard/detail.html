@@ -9,10 +9,10 @@
 게시글 상세 조회
 <br/>
 image
-<div id="div_tbboard_pics_image">
+<div id="div_bkboard_pics_image">
 </div>
 file
-<div id="div_tbboard_pics_file">
+<div id="div_bkboard_pics_file">
 </div>
 <div>
     =========================================
@@ -20,11 +20,11 @@ file
 제목<div id="div_title">-</div>
 작성일시<div id="div_created_at">-</div>
 내용<div id="div_content">-</div>
-<input id="detail_tboard_id" type="hidden"/>
+<input id="detail_bkoard_id" type="hidden"/>
 ////<br/>
 <div style="display: none;">
-<label for="search_tbboardId">제목 키워드</label>
-<input id="search_tbboardId" />
+<label for="search_bkboardId">제목 키워드</label>
+<input id="search_bkboardId" />
 <label for="search_deleted">deleted 키워드</label>
 <input id="search_deleted" />
 <br/>
@@ -52,23 +52,26 @@ file
 <div>
     =========================================
 </div>
-총 댓글 수 : <h1 id="font_tbcmt_list_size">-</h1> 개 <br/>
+총 댓글 수 : <h1 id="font_bkcmt_list_size">-</h1> 개 <br/>
 <div style="display: none;">
-가장 끝 페이지 수 : <h1 id="font_tbcmt_page_size">-</h1> 개
+가장 끝 페이지 수 : <h1 id="font_bkcmt_page_size">-</h1> 개
 </div>
-<div id="tbody_tbcmt_list">
+<div id="tbody_bkcmt_list">
 </div>
 
 ////<br/>
 댓글 작성
 <input id="create_content" />
-<a onclick="create_tbcmt()">comment</a>
-<!--<a onclick="detail_tbboard()">select</a>-->
+<!--comment 추가-->
+<a onclick="create_bkcmt()">comment</a>
+<!--<a onclick="detail_bkboard()">select</a>-->
+<!--readURLFile 파일 읽기-->
 <input class="hide" type="file" id="create_mpic" onchange="readURLFile(this)" accept="image/*" />
 <button class="btn btn-warning me-2" onclick="$('#create_mpic').click();return false;">사진 추가</button>
 
     <script>
         let limit_each_file_size = 10;
+        //파일 로컬에서 읽기
         function readURLFile(input) {
             let temp_id = $(input).attr("id") + "";
             if (input.files && input.files[0]) {
@@ -87,6 +90,7 @@ file
                         $('#' + temp_id).val(null);
                         $('#img_' + temp_id).attr('src', "/resources/image/no-pic.jpg");
                     } else {
+                        // 파일 byte로 파싱해야지?
                         listener_upload_file(input.files[0]);
                     }
                 }
@@ -108,7 +112,8 @@ file
                     switch(xhr.status){
                         case 201:
                             //alert(data);
-                            create_tbpic(data);
+                            // byte로 바꾸는 거 성공하면 저장해야지
+                            create_bkpic(data);
                             break;
                         default:
                             console.log("no matching status code");
@@ -132,14 +137,16 @@ file
         }
     </script>
 <script>
-    function listener_delete_tbpic(obj_this){
+    //파일 삭제 deleted y로 바꿔주기
+    function listener_delete_bkpic(obj_this){
         let id = $(obj_this).attr("key");
         //alert(id);
-        delete_tbpic(id);
+        delete_bkpic(id);
     }
-    function delete_tbpic(id){
+    //deleted y로 바꿔주기
+    function delete_bkpic(id){
         $.ajax({
-            url: "/api/tbpic",
+            url: "/api/bkpic",
             type: "DELETE",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
@@ -148,8 +155,8 @@ file
             cache: false,
             success: (data, status, xhr)=>{
                 if(status == "success"){
-                    //$("#div_tbpic_" + id).remove();
-                    $("#p_tbpic_" + id).text("Y");
+                    //$("#div_bkpic_" + id).remove();
+                    $("#p_bkpic_" + id).text("Y");
                 }
 
                 //alert("data : " + JSON.stringify(data));
@@ -163,60 +170,72 @@ file
     }
 </script>
 <script>
-    detail_tbboard();
-    function detail_tbboard(){
-
+    //바로 실행
+    detail_bkboard();
+    //detail page 로드하면 바로 실행하는거야?*
+    function detail_bkboard(){
+        // 현재 bkboard의 url 받아오기
         let temp_url_with_idx = window.location.href;
-        // http://localhost:8080/tbboard/detail/de0ea4ddc1cf46c1a971d770f8a94b44
+        // http://localhost:8080/bkboard/detail/de0ea4ddc1cf46c1a971d770f8a94b44
         let split_slash_temp_idx = temp_url_with_idx.split('/');
         let temp_idx = split_slash_temp_idx[split_slash_temp_idx.length - 1];
         let split_question_temp_idx = temp_idx.split('?');
         if(split_question_temp_idx.length > 0){
+            //detail page의 id 만 받아오기
             temp_idx = split_question_temp_idx[0];
             // de0ea4ddc1cf46c1a971d770f8a94b44
         }
-        $("#detail_tboard_id").val(temp_idx);
-        search_tbcmt();
-
+        //detail_bkoard_id의 value 값에 id 값 넣어주기
+        $("#detail_bkoard_id").val(temp_idx);
+        search_bkcmt();
+        // id 값 넘기면
         $.ajax({
-            url: "/api/tbboard/" + temp_idx,
+            url: "/api/bkboard/" + temp_idx,
             type: "GET",
             contentType : 'application/json; charset=utf-8',
             cache: false,
+            // 하나씩 채운다.
             success: (data, status, xhr)=>{
                 //alert("data : " + JSON.stringify(data));
                 $("#div_title").html(data.title);
                 $("#div_content").html(data.content);
                 $("#div_created_at").html(data.created_at);
+                //picture 값도 하나씩 append 한다.
                 let pics = data.pics;
                 for(pic of pics){
-                    $("#div_tbboard_pics_image").append(
-                        "<div id='div_tbpic_"+pic.id+"'>"
+                    $("#div_bkboard_pics_image").append(
+                        "<div id='div_bkpic_"+pic.id+"'>"
                         +"id : " + pic.id
-                        +"//deleted : <font id='p_tbpic_"+pic.id+"'>"+pic.deleted+"</font>"
+                        +"//deleted : <font id='p_bkpic_"+pic.id+"'>"+pic.deleted+"</font>"
                         +"<img height='100px' src='"+pic.content+"' />"
-                        +"<a key='"+pic.id+"' onclick='listener_delete_tbpic(this)'> 삭제</a>"
+                        +"<a key='"+pic.id+"' onclick='listener_delete_bkpic(this)'> 삭제</a>"
                         +"</div>"
                     );
                 }
+                // 파일값도 하나씩 어펜드한다.
                 let files = data.files;
                 for(pic of files){
-                    $("#div_tbboard_pics_file").append(
-                        "<div id='div_tbpic_"+pic.id+"'>"
+                    $("#div_bkboard_pics_file").append(
+                        "<div id='div_bkpic_"+pic.id+"'>"
                         +"id : " + pic.id
-                        +"//deleted : <font id='p_tbpic_"+pic.id+"'>"+pic.deleted+"</font>"
+                        +"//deleted : <font id='p_bkpic_"+pic.id+"'>"+pic.deleted+"</font>"
 
                         +'<a class="a_thisisdownload" target="_blank" href="'+pic.content+'">'+pic.content+'다운로드</a>'
 
-                        +"<a key='"+pic.id+"' onclick='listener_delete_tbpic(this)'> 삭제</a>"
+                        +"<a key='"+pic.id+"' onclick='listener_delete_bkpic(this)'> 삭제</a>"
                         +"</div>"
                     );
                 }
+                //
                 let a_thisisdownload = $(".a_thisisdownload");
                 for(let i = 0;i<a_thisisdownload.length;i++){
+                    // download url 저장
                     let a_thisisdownload_href = $(a_thisisdownload[i]).attr("href");
+                    // uploadfile을 download 파일로 주소 변환
                     a_thisisdownload_href = a_thisisdownload_href.replace("uploadfile/", "download/");
+                    // href 주소값 변경
                     $(a_thisisdownload[i]).attr("href", a_thisisdownload_href);
+                    // 그리고 클래스 값들 다 지우기
                     $(a_thisisdownload[i]).removeClass("a_thisisdownload");
                 }
             },
@@ -225,14 +244,14 @@ file
         });
 
     }
-
-    function create_tbpic(content){
+    //bkpic rescontroller 불러서 데이터베이스에 저장
+    function create_bkpic(content){
         $.ajax({
-            url: "/api/tbpic",
+            url: "/api/bkpic",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
-                'tbboardId' : $("#detail_tboard_id").val(),
+                'bkboardId' : $("#detail_bkoard_id").val(),
                 'content' : content,
                 'type' : "image"
             }),
@@ -244,18 +263,18 @@ file
 
                     //xhr : {"readyState":4,"responseText":"{\"id\":\"f051928922e7423889b9d9b035954204\"}","responseJSON":{"id":"f051928922e7423889b9d9b035954204"},"status":201,"statusText":"success"}
                     //alert(content);
-
+                    //성공하면
                     let pic = new Map();
                     pic.id = data.id;
                     pic.content = content;
                     pic.deleted = "N";
-
-                    $("#div_tbboard_pics_image").append(
-                        "<div id='div_tbpic_"+pic.id+"'>"
+                    //하나씩 append
+                    $("#div_bkboard_pics_image").append(
+                        "<div id='div_bkpic_"+pic.id+"'>"
                         +"id : " + pic.id
-                        +"//deleted : <font id='p_tbpic_"+pic.id+"'>"+pic.deleted+"</font>"
+                        +"//deleted : <font id='p_bkpic_"+pic.id+"'>"+pic.deleted+"</font>"
                         +"<img height='100px' src='"+pic.content+"' />"
-                        +"<a key='"+pic.id+"' onclick='listener_delete_tbpic(this)'> 삭제</a>"
+                        +"<a key='"+pic.id+"' onclick='listener_delete_bkpic(this)'> 삭제</a>"
                         +"</div>"
                     );
 
@@ -269,20 +288,23 @@ file
         });
 
     }
-    function create_tbcmt(){
+    //comment 추가하는 거지
+    function create_bkcmt(){
         $.ajax({
-            url: "/api/tbcmt",
+            url: "/api/bkcmt",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
-                'tbboardId' : $("#detail_tboard_id").val(),
+                'bkboardId' : $("#detail_bkoard_id").val(),
                 'content' : $("#create_content").val()
             }),
             cache: false,
             success: (data, status, xhr)=>{
                 //
                 if(status == "success"){
-                    search_tbcmt();
+                    //bkboard 에 맞는 cmt를 찾는거지
+                    search_bkcmt();
+                    // 그리고 적어논 cmt 값은 공백으로 만드는거야
                     $("#create_content").val("");
                 }
                 //alert("data : " + JSON.stringify(data));
@@ -294,9 +316,10 @@ file
         });
 
     }
-    function search_tbcmt(){
+    //bkcmt는 boardid에 맞는 cmt 값들을 찾아서 뿌려주는 것이다.
+    function search_bkcmt(){
         $.ajax({
-            url: "/api/tbcmt/pagedList",
+            url: "/api/bkcmt/pagedList",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
@@ -306,20 +329,22 @@ file
                 'orderway' : $("#search_orderway").val(),
                 'callpage' : $("#search_callpage").val(),
                 'perpage' : $("#search_perpage").val(),
-                'tbboard_id' : $("#detail_tboard_id").val(),
+                'bkboard_id' : $("#detail_bkoard_id").val(),
                 'deleted' : $("#search_deleted").val()
             }),
             cache: false,
+            // 다 찾으면 cmt 뿌려주기
             success: (data, status, xhr)=>{
                 //alert("data : " + JSON.stringify(data));
-                $("#font_tbcmt_list_size").html(data.listsize);
-                $("#font_tbcmt_page_size").html(data.lastpage);
-                $("#tbody_tbcmt_list").html("");
+                $("#font_bkcmt_list_size").html(data.listsize);
+                $("#font_bkcmt_page_size").html(data.lastpage);
+                $("#tbody_bkcmt_list").html("");
                 $("#search_callpage").val(data.callpage);
                 $("#search_perpage").val(data.perpage);
                 let tlist = data.list;
+                // 하나씩 append 해줘야지
                 for(let i=0;i<tlist.length;i++){
-                    $("#tbody_tbcmt_list").append(
+                    $("#tbody_bkcmt_list").append(
                         "<div>" +tlist[i].content + "//"+ JSON.stringify(tlist[i].created_at)  +"</div>"
                     );
                 }

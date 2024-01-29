@@ -44,13 +44,14 @@
 <div>
     =========================================
 </div>
-<div id="tbody_tbboard_list">
+<div id="tbody_bkboard_list">
 </div>
 
 
-<a onclick="search_tbboard()">더보기</a>
+<a onclick="search_bkboard()">더보기</a>
 <script>
-    function search_tbboard(){
+    //
+    function search_bkboard(){
         let search_cway = $("#search_cway").val() + "";
         let cdatetime = "";
         if(search_cway == "recent"){
@@ -59,18 +60,19 @@
             cdatetime = $("#search_sdatetime").val() + "";
         }
         let input_keyword_changed = $("#input_keyword_changed").val() + "";
+        //
         if(input_keyword_changed == "1"){
             search_cway = "before";
             $("#search_cway").val(search_cway);
             cdatetime = "";
             $("#search_sdatetime").val("");
             $("#search_fdatetime").val("");
-            $("#tbody_tbboard_list").html("");
+            $("#tbody_bkboard_list").html("");
             $("#input_keyword_changed").val("0");
         }
-
+        //morelist로 보내주면
         $.ajax({
-            url: "/api/tbboard/moreList",
+            url: "/api/bkboard/moreList",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
@@ -82,10 +84,12 @@
                 'title' : $("#search_title").val(),
                 'deleted' : $("#search_deleted").val()
             }),
+
             cache: false,
             success: (data, status, xhr)=>{
                 alert("data : " + JSON.stringify(data));
                 let tlist = data;
+                //하니씩 불러와서
                 for(let i=0;i<tlist.length;i++){
                     let this_created_at = tlist[i].created_at + "";
                     //초기값 설정
@@ -105,11 +109,12 @@
                     }
 
                     if(search_cway == "recent"){
-                        $("#tbody_tbboard_list").prepend(
+                        //prepend 거꾸로 붙이나봐
+                        $("#tbody_bkboard_list").prepend(
                             "<div>" + this_created_at + "//" + JSON.stringify(tlist[i].id) + "//" + JSON.stringify(tlist[i].title)   +"</div>"
                         );
                     } else {
-                        $("#tbody_tbboard_list").append(
+                        $("#tbody_bkboard_list").append(
                             "<div>" + this_created_at + "//" + JSON.stringify(tlist[i].id) + "//" + JSON.stringify(tlist[i].title)   +"</div>"
                         );
                     }

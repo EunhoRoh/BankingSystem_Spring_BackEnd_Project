@@ -1,6 +1,6 @@
-package com.thc.sprapi.domain;
+package com.eunho.bankingsystem_spring_v2.domain;
 
-import com.thc.sprapi.dto.TbcmtDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkcmtDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -12,38 +12,38 @@ import lombok.ToString;
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
-        @Index(columnList = "tbboardId")
+        @Index(columnList = "bkboardId")
         ,@Index(columnList = "createdAt")
         ,@Index(columnList = "modifiedAt")
 })
 @Entity
-public class Tbcmt extends AuditingFields {
+public class Bkcmt extends AuditingFields {
 
-    @Setter @Column(nullable = false) private String tbboardId; // 게시판의 pk
+    @Setter @Column(nullable = false) private String bkboardId; // 게시판의 pk
     @Setter @Column(nullable = false, length = 10000) private String content;
 
-    protected Tbcmt(){}
-    private Tbcmt(String tbboardId, String content) {
-        this.tbboardId = tbboardId;
+    protected Bkcmt(){}
+    private Bkcmt(String bkboardId, String content) {
+        this.bkboardId = bkboardId;
         this.content = content;
     }
-    public static Tbcmt of(String tbboardId, String content) {
-        return new Tbcmt(tbboardId, content);
+    public static Bkcmt of(String bkboardId, String content) {
+        return new Bkcmt(bkboardId, content);
     }
-    public static Tbcmt of(String tbboardId) {
-        return new Tbcmt(tbboardId, "");
+    public static Bkcmt of(String bkboardId) {
+        return new Bkcmt(bkboardId, "");
     }
 
-    public TbcmtDto.TbcmtAfterCreateDto toAfterCreateDto() {
-        return TbcmtDto.TbcmtAfterCreateDto.builder()
+    public BkcmtDto.BkcmtAfterCreateDto toAfterCreateDto() {
+        return BkcmtDto.BkcmtAfterCreateDto.builder()
                 .id(super.getId())
                 .build();
     }
-    public TbcmtDto.TbcmtAfterUpdateDto toAfterUpdateDto() {
-        return TbcmtDto.TbcmtAfterUpdateDto.builder()
+    public BkcmtDto.BkcmtAfterUpdateDto toAfterUpdateDto() {
+        return BkcmtDto.BkcmtAfterUpdateDto.builder()
                 .id(super.getId())
                 .deleted(super.getDeleted())
-                .tbboardId(getTbboardId())
+                .bkboardId(getBkboardId())
                 .content(getContent())
                 .build();
     }

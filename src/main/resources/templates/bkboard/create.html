@@ -21,7 +21,7 @@
 <div>
     =========================================
 </div>
-<a onclick="create_tbboard()">write</a>
+<a onclick="create_bkboard()">write</a>
 <div>
     =========================================
 </div>
@@ -37,6 +37,7 @@
 
     <script>
         let limit_each_file_size = 10;
+        // 파일 로컬에서 읽기
         function readURLFile(input) {
             let temp_id = $(input).attr("id") + "";
             if (input.files && input.files[0]) {
@@ -61,14 +62,18 @@
                     } else {
                         t_type = "image";
                     }
+                    //파일 url 받고 파일 type도 보내주기
                     listener_upload_file(input.files[0], t_type);
                 }
             }
         }
+
+        //uploadFile로
         function listener_upload_file(obj_file, t_type) {
             let fileData = new FormData();
+            // file url 저장
             fileData.append("file", obj_file);
-
+            // rest controller로 파일 url 바이트로 파싱한거 받아오기
             $.ajax({
                 url: "/api/default/uploadFile",
                 type: "POST",
@@ -80,6 +85,7 @@
                     //alert(xhr.status);
                     switch(xhr.status){
                         case 201:
+                            // 파일 받아온거 하나씩 append
                             //alert(data);
                             $("#div_array_tbpic").append(
                                 '<div class="">'
@@ -112,10 +118,12 @@
         }
     </script>
 <script>
-    function create_tbboard(){
+    //bkboard 새로 만들기
+    function create_bkboard(){
 
         let pics = [];
         let types = [];
+        // .input_tbpic class 다 받아오기
         let input_tbpic = $(".input_tbpic");
         let input_tbpic_type = $(".input_tbpic_type");
         for(let i=0;i<input_tbpic.length;i++){
@@ -125,9 +133,10 @@
         //return false;
 
         $.ajax({
-            url: "/api/tbboard",
+            url: "/api/bkboard",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
+            //pics, types, title, content 전달
             data: JSON.stringify({
                 'pics' : pics,
                 'types' : types,
@@ -135,6 +144,7 @@
                 'content' : $("#create_content").val()
             }),
             cache: false,
+            //성공
             success: (data, status, xhr)=>{
                 alert("data : " + JSON.stringify(data));
                 //alert("status : " + JSON.stringify(status));

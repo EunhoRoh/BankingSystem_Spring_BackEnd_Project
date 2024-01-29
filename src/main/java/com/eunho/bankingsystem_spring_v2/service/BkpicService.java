@@ -1,16 +1,16 @@
-package com.thc.sprapi.service;
+package com.eunho.bankingsystem_spring_v2.service;
 
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbpicDto;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkpicDto;
 
 import java.util.List;
 
-public interface TbpicService {
-    public TbpicDto.TbpicAfterCreateDto create(TbpicDto.TbpicCreateDto params);
-    public TbpicDto.TbpicAfterUpdateDto update(TbpicDto.TbpicUpdateDto params);
-    public TbpicDto.TbpicAfterUpdateDto delete(TbpicDto.TbpicUpdateDto params);
-    public TbpicDto.TbpicSelectDto detail(String id);
-    public List<TbpicDto.TbpicSelectDto> list(TbpicDto.TbpicListDto params);
-    public List<TbpicDto.TbpicSelectDto> moreList(TbpicDto.TbpicMoreListDto params);
-    public CommonAfterPagedListDto<TbpicDto.TbpicSelectDto> pagedList(TbpicDto.TbpicPagedListDto params);
+public interface BkpicService {
+    public BkpicDto.BkpicAfterCreateDto create(BkpicDto.BkpicCreateDto params);
+    public BkpicDto.BkpicAfterUpdateDto update(BkpicDto.BkpicUpdateDto params);
+    public BkpicDto.BkpicAfterUpdateDto delete(BkpicDto.BkpicUpdateDto params);
+    public BkpicDto.BkpicSelectDto detail(String id);
+    public List<BkpicDto.BkpicSelectDto> list(BkpicDto.BkpicListDto params);
+    public List<BkpicDto.BkpicSelectDto> moreList(BkpicDto.BkpicMoreListDto params);
+    public CommonAfterPagedListDto<BkpicDto.BkpicSelectDto> pagedList(BkpicDto.BkpicPagedListDto params);
 }

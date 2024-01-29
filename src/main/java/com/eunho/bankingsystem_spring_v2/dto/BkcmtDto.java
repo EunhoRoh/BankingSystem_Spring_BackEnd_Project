@@ -1,13 +1,13 @@
-package com.thc.sprapi.dto;
+package com.eunho.bankingsystem_spring_v2.dto;
 
-import com.thc.sprapi.domain.Tbcmt;
+import com.eunho.bankingsystem_spring_v2.domain.Bkcmt;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-public class TbcmtDto {
+public class BkcmtDto {
 	
 	@Schema
 	@Builder
@@ -15,12 +15,12 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtCreateDto {
-		@Schema(description = "tbboardId", example="tbboardId")
+	public static class BkcmtCreateDto {
+		@Schema(description = "bkboardId", example="bkboardId")
 		@NotNull
 		@NotEmpty
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 
 		@Schema(description = "content", example="content")
 		@NotNull
@@ -28,8 +28,8 @@ public class TbcmtDto {
 		@Size(max=200)
 		private String content;
 
-		public Tbcmt toEntity() {
-			return Tbcmt.of(tbboardId, content);
+		public Bkcmt toEntity() {
+			return Bkcmt.of(bkboardId, content);
 		}
 	}
 	@Schema
@@ -38,7 +38,7 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtAfterCreateDto {
+	public static class BkcmtAfterCreateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 	}
@@ -49,16 +49,16 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtUpdateDto {
+	public static class BkcmtUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		@NotNull
 		@NotEmpty
 		@Size(max=32)
 		private String id;
 
-		@Schema(description = "tbboardId", example="tbboardId")
+		@Schema(description = "bkboardId", example="bkboardId")
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 
 		@Schema(description = "deleted", example="Y")
 		@Size(max=1)
@@ -74,14 +74,14 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtAfterUpdateDto {
+	public static class BkcmtAfterUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 		@Schema(description = "deleted", example="Y")
 		private String deleted;
-		@Schema(description = "tbboardId", example="tbboardId")
+		@Schema(description = "bkboardId", example="bkboardId")
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 		@Schema(description = "content", example="content")
 		@Size(max=200)
 		private String content;
@@ -93,12 +93,12 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtSelectDto {
+	public static class BkcmtSelectDto {
 
 		@Schema(description = "id", example="id")
 		private String id;
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "deleted", example="N")
@@ -116,9 +116,9 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtListDto {
-		@Schema(description = "tbboard_id", example="tbboardId")
-		private String tbboard_id;
+	public static class BkcmtListDto {
+		@Schema(description = "bkboard_id", example="bkboardId")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "deleted", example="N")
@@ -130,9 +130,9 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtPagedListDto extends CommonPagedListDto {
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+	public static class BkcmtPagedListDto extends CommonPagedListDto {
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "deleted", example="N")
@@ -143,9 +143,9 @@ public class TbcmtDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbcmtMoreListDto extends CommonMoreListDto {
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+	public static class BkcmtMoreListDto extends CommonMoreListDto {
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "deleted", example="N")

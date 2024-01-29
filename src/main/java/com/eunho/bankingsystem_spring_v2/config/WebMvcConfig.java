@@ -1,10 +1,11 @@
-package com.thc.sprapi.config;
+package com.eunho.bankingsystem_spring_v2.config;
 
-import com.thc.sprapi.interceptor.DefaultInterceptor;
+import com.eunho.bankingsystem_spring_v2.interceptor.DefaultInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+//interceptor 추가
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 

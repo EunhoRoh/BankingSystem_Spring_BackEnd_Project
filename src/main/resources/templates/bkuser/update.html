@@ -20,11 +20,11 @@
 =========================================
 </div>
 
-<a onclick="update_tbuser()">update</a>
+<a onclick="update_bkuser()">update</a>
 <script>
-    function update_tbuser(){
+    function update_bkuser(){
         $.ajax({
-            url: "/api/tbuser",
+            url: "/api/bkuser",
             type: "PUT",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

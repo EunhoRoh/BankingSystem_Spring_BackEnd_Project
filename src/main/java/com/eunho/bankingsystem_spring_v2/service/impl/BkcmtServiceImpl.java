@@ -1,12 +1,12 @@
-package com.thc.sprapi.service.impl;
+package com.eunho.bankingsystem_spring_v2.service.impl;
 
-import com.thc.sprapi.domain.Tbcmt;
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbcmtDto;
-import com.thc.sprapi.exception.NoMatchingDataException;
-import com.thc.sprapi.mapper.TbcmtMapper;
-import com.thc.sprapi.repository.TbcmtRepository;
-import com.thc.sprapi.service.TbcmtService;
+import com.eunho.bankingsystem_spring_v2.domain.Bkcmt;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkcmtDto;
+import com.eunho.bankingsystem_spring_v2.exception.NoMatchingDataException;
+import com.eunho.bankingsystem_spring_v2.mapper.BkcmtMapper;
+import com.eunho.bankingsystem_spring_v2.repository.BkcmtRepository;
+import com.eunho.bankingsystem_spring_v2.service.BkcmtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,60 +14,60 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TbcmtServiceImpl implements TbcmtService {
+public class BkcmtServiceImpl implements BkcmtService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final TbcmtRepository tbcmtRepository;
-    private final TbcmtMapper tbcmtMapper;
-    public TbcmtServiceImpl(
-            TbcmtRepository tbcmtRepository
-            ,TbcmtMapper tbcmtMapper
+    private final BkcmtRepository bkcmtRepository;
+    private final BkcmtMapper bkcmtMapper;
+    public BkcmtServiceImpl(
+            BkcmtRepository bkcmtRepository
+            ,BkcmtMapper bkcmtMapper
     ) {
-        this.tbcmtRepository = tbcmtRepository;
-        this.tbcmtMapper = tbcmtMapper;
+        this.bkcmtRepository = bkcmtRepository;
+        this.bkcmtMapper = bkcmtMapper;
     }
 
-    public TbcmtDto.TbcmtAfterCreateDto create(TbcmtDto.TbcmtCreateDto params){
-        return tbcmtRepository.save(params.toEntity()).toAfterCreateDto();
+    public BkcmtDto.BkcmtAfterCreateDto create(BkcmtDto.BkcmtCreateDto params){
+        return bkcmtRepository.save(params.toEntity()).toAfterCreateDto();
     }
-    public TbcmtDto.TbcmtAfterUpdateDto update(TbcmtDto.TbcmtUpdateDto params){
-        Tbcmt tbcmt = tbcmtRepository.findById(params.getId())
+    public BkcmtDto.BkcmtAfterUpdateDto update(BkcmtDto.BkcmtUpdateDto params){
+        Bkcmt bkcmt = bkcmtRepository.findById(params.getId())
                 .orElseThrow(() -> new NoMatchingDataException(""));
-        if(params.getTbboardId() != null){
-            tbcmt.setTbboardId(params.getTbboardId());
+        if(params.getBkboardId() != null){
+            bkcmt.setBkboardId(params.getBkboardId());
         }
         if(params.getContent() != null){
-            tbcmt.setContent(params.getContent());
+            bkcmt.setContent(params.getContent());
         }
         if(params.getDeleted() != null){
-            tbcmt.setDeleted(params.getDeleted());
+            bkcmt.setDeleted(params.getDeleted());
         }
-        tbcmtRepository.save(tbcmt);
-        return tbcmt.toAfterUpdateDto();
+        bkcmtRepository.save(bkcmt);
+        return bkcmt.toAfterUpdateDto();
     }
 
-    public TbcmtDto.TbcmtSelectDto detail(String id){
-        return tbcmtMapper.detail(id);
+    public BkcmtDto.BkcmtSelectDto detail(String id){
+        return bkcmtMapper.detail(id);
     }
-    public List<TbcmtDto.TbcmtSelectDto> list(TbcmtDto.TbcmtListDto params){
+    public List<BkcmtDto.BkcmtSelectDto> list(BkcmtDto.BkcmtListDto params){
         /*
         // 상세 정보 조회 하는 것을 디테일에만 맡길때
-        List<TbcmtDto.TbcmtSelectDto> a_list = tbcmtMapper.list(params);
-        List<TbcmtDto.TbcmtSelectDto> result_list = new ArrayList<>();
-        for(TbcmtDto.TbcmtSelectDto a : a_list){
+        List<BkcmtDto.BkcmtSelectDto> a_list = bkcmtMapper.list(params);
+        List<BkcmtDto.BkcmtSelectDto> result_list = new ArrayList<>();
+        for(BkcmtDto.BkcmtSelectDto a : a_list){
             result_list.add(detail(a.getId()));
         }
         return result_list;
          */
-        return tbcmtMapper.list(params);
+        return bkcmtMapper.list(params);
     }
-    public List<TbcmtDto.TbcmtSelectDto> moreList(TbcmtDto.TbcmtMoreListDto params){
+    public List<BkcmtDto.BkcmtSelectDto> moreList(BkcmtDto.BkcmtMoreListDto params){
         params.afterBuild();
-        return tbcmtMapper.moreList(params);
+        return bkcmtMapper.moreList(params);
     }
-    public CommonAfterPagedListDto<TbcmtDto.TbcmtSelectDto> pagedList(TbcmtDto.TbcmtPagedListDto params){
-        return new CommonAfterPagedListDto<>(params.afterBuild(tbcmtMapper.pagedListCount(params)), tbcmtMapper.pagedList(params));
+    public CommonAfterPagedListDto<BkcmtDto.BkcmtSelectDto> pagedList(BkcmtDto.BkcmtPagedListDto params){
+        return new CommonAfterPagedListDto<>(params.afterBuild(bkcmtMapper.pagedListCount(params)), bkcmtMapper.pagedList(params));
     }
 
 }

@@ -1,17 +1,16 @@
-package com.thc.sprapi.service;
+package com.eunho.bankingsystem_spring_v2.service;
 
-import com.thc.sprapi.domain.Tbuser;
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbuserDto;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkuserDto;
 
 import java.util.List;
 
-public interface TbuserService {
+public interface BkuserService {
 
-    public TbuserDto.TbuserAfterCreateDto create(TbuserDto.TbuserCreateDto params);
-    public TbuserDto.TbuserAfterUpdateDto update(TbuserDto.TbuserUpdateDto params);
-    public TbuserDto.TbuserSelectDto detail(String id);
-    public List<TbuserDto.TbuserSelectDto> list(TbuserDto.TbuserListDto params);
-    public List<TbuserDto.TbuserSelectDto> moreList(TbuserDto.TbuserMoreListDto params);
-    public CommonAfterPagedListDto<TbuserDto.TbuserSelectDto> pagedList(TbuserDto.TbuserPagedListDto params);
+    public BkuserDto.BkuserAfterCreateDto create(BkuserDto.BkuserCreateDto params);
+    public BkuserDto.BkuserAfterUpdateDto update(BkuserDto.BkuserUpdateDto params);
+    public BkuserDto.BkuserSelectDto detail(String id);
+    public List<BkuserDto.BkuserSelectDto> list(BkuserDto.BkuserListDto params);
+    public List<BkuserDto.BkuserSelectDto> moreList(BkuserDto.BkuserMoreListDto params);
+    public CommonAfterPagedListDto<BkuserDto.BkuserSelectDto> pagedList(BkuserDto.BkuserPagedListDto params);
 }

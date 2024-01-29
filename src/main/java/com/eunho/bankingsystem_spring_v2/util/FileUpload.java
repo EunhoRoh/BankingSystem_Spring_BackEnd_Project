@@ -1,13 +1,4 @@
-package com.thc.sprapi.util;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.io.FilenameUtils;
+package com.eunho.bankingsystem_spring_v2.util;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -18,6 +9,14 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 public class FileUpload {
     private static final String BUCKET_NAME = "jiksang-user-pub";
@@ -59,10 +58,13 @@ public class FileUpload {
 		}
 		return returnValue;
 	}
+	
+	
 	public static String local(
 			MultipartFile mf, HttpServletRequest request
 	) throws IOException {
 		String returnValue = "";
+		//MultipartFile로 파일 url 받기
 		try {
 			String root_path = path(request);
 			setDir(root_path);
@@ -79,15 +81,18 @@ public class FileUpload {
 			~6개까지?
 			우리는 그냥 놔두기로!!
 			 */
-
+			
+			// 바이트로 받은걸 파일로 copy
 			FileCopyUtils.copy(mf.getBytes(), new File(root_path + filename));
 			returnValue = "/uploadfile/" + filename;
 		} catch (Exception e) {
 			System.out.println("======================Exception : " + e);
 		}
+		//파일 url return
 		return returnValue;
 	}
 	public static String path(HttpServletRequest request) throws IOException {
+		// 실제 서버 패쓰 살기
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 
 		//서버 업로드 이후를 위한 코드
@@ -109,8 +114,10 @@ public class FileUpload {
 			root_path = "Users/workspace/";
 		}
 		String attach_path = "uploadfiles/";
+		//저장할 파일 위치 설정
 		return root_path + attach_path;
 	}
+	//파일 이름도 바꾸자
 	public static String setFileName(MultipartFile mf){
 		String result = "";
 		if (mf == null || "".equals(mf.getOriginalFilename() + "")) {
@@ -129,11 +136,14 @@ public class FileUpload {
 			filename = "file" + "." + extension;
 			 */
 			// file.jpg
+			//바꾼 파일이름 return
 			result = temp_date + "_" + filename;
 			// 92032037230952_file.jpg
 		}
 		return result;
 	}
+	
+	// 디렉토리도 만들자
 	public static void setDir(String root_path){
 		// 디랙토리 주소에 대해서, File 객체에 담음.(파일이 아니라, 폴더!!)
 		File newfile = new File(root_path);

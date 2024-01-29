@@ -20,11 +20,12 @@
 =========================================
 </div>
 
-<a onclick="update_tbboard()">update</a>
+<a onclick="update_bkboard()">update</a>
 <script>
-    function update_tbboard(){
+    //ㅅ수정해야지
+    function update_bkboard(){
         $.ajax({
-            url: "/api/tbboard",
+            url: "/api/bkboard",
             type: "PUT",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

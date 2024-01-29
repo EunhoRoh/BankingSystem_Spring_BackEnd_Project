@@ -1,4 +1,4 @@
-package com.thc.sprapi.exception;
+package com.eunho.bankingsystem_spring_v2.exception;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,11 +1,19 @@
-package com.thc.sprapi.service;
+package com.eunho.bankingsystem_spring_v2.service;
 
-import com.thc.sprapi.dto.TbboardDto;
-import org.springframework.stereotype.Service;
-import org.springframework.stereotype.Service;
+import com.eunho.bankingsystem_spring_v2.dto.BkboardDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkcmtDto;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
 
-public interface TbboardService {
-    public TbboardDto.TbboardAfterCreateDto create(TbboardDto.TbboardCreateDto params);
-    public TbboardDto.TbboardAfterUpdateDto update(TbboardDto.TbboardUpdateDto params);
-    public TbboardDto.TbboardSelectDto get(String id);
+import java.util.List;
+
+public interface BkboardService {
+    public BkboardDto.BkboardAfterCreateDto create(BkboardDto.BkboardCreateDto params);
+    public BkboardDto.BkboardAfterUpdateDto update(BkboardDto.BkboardUpdateDto params);
+//    public BkboardDto.BkboardSelectDto get(String id);
+
+
+    public BkboardDto.BkboardSelectDto detail(String id);
+    public List<BkboardDto.BkboardSelectDto> list(BkboardDto.BkboardSelectDto params);
+    public List<BkboardDto.BkboardSelectDto> moreList(BkboardDto.BkboardSelectDto params);
+    public CommonAfterPagedListDto<BkboardDto.BkboardSelectDto> pagedList(BkboardDto.BkboardSelectDto params);
 }

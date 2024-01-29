@@ -37,17 +37,17 @@
 <div>
     =========================================
 </div>
-총 글 수 : <h1 id="font_tbuser_list_size">-</h1> 개 <br/>
-가장 끝 페이지 수 : <h1 id="font_tbuser_page_size">-</h1> 개
-<div id="tbody_tbuser_list">
+총 글 수 : <h1 id="font_bkuser_list_size">-</h1> 개 <br/>
+가장 끝 페이지 수 : <h1 id="font_bkuser_page_size">-</h1> 개
+<div id="bkody_bkuser_list">
 </div>
 
 
-<a onclick="search_tbuser()">search</a>
+<a onclick="search_bkuser()">search</a>
 <script>
-    function search_tbuser(){
+    function search_bkuser(){
         $.ajax({
-            url: "/api/tbuser/pagedList",
+            url: "/api/bkuser/pagedList",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
@@ -63,14 +63,14 @@
             cache: false,
             success: (data, status, xhr)=>{
                 alert("data : " + JSON.stringify(data));
-                $("#font_tbuser_list_size").html(data.listsize);
-                $("#font_tbuser_page_size").html(data.lastpage);
-                $("#tbody_tbuser_list").html("");
+                $("#font_bkuser_list_size").html(data.listsize);
+                $("#font_bkuser_page_size").html(data.lastpage);
+                $("#bkody_bkuser_list").html("");
                 $("#search_callpage").val(data.callpage);
                 $("#search_perpage").val(data.perpage);
                 let tlist = data.list;
                 for(let i=0;i<tlist.length;i++){
-                    $("#tbody_tbuser_list").append(
+                    $("#bkody_bkuser_list").append(
                         "<div>" + JSON.stringify(tlist[i])   +"</div>"
                     );
                 }

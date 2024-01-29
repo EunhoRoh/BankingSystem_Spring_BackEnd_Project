@@ -1,13 +1,13 @@
-package com.thc.sprapi.dto;
+package com.eunho.bankingsystem_spring_v2.dto;
 
-import com.thc.sprapi.domain.Tbpic;
+import com.eunho.bankingsystem_spring_v2.domain.Bkpic;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-public class TbpicDto {
+public class BkpicDto {
 	
 	@Schema
 	@Builder
@@ -15,12 +15,12 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicCreateDto {
-		@Schema(description = "tbboardId", example="tbboardId")
+	public static class BkpicCreateDto {
+		@Schema(description = "bkboardId", example="bkboardId")
 		@NotNull
 		@NotEmpty
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 
 		@Schema(description = "content", example="content")
 		@NotNull
@@ -33,8 +33,8 @@ public class TbpicDto {
 		@NotEmpty
 		private String type;
 
-		public Tbpic toEntity() {
-			return Tbpic.of(tbboardId, content, type);
+		public Bkpic toEntity() {
+			return Bkpic.of(bkboardId, content, type);
 		}
 	}
 	@Schema
@@ -43,7 +43,7 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicAfterCreateDto {
+	public static class BkpicAfterCreateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 	}
@@ -54,16 +54,16 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicUpdateDto {
+	public static class BkpicUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		@NotNull
 		@NotEmpty
 		@Size(max=32)
 		private String id;
 
-		@Schema(description = "tbboardId", example="tbboardId")
+		@Schema(description = "bkboardId", example="bkboardId")
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 
 		@Schema(description = "deleted", example="Y")
 		@Size(max=1)
@@ -82,14 +82,14 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicAfterUpdateDto {
+	public static class BkpicAfterUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 		@Schema(description = "deleted", example="Y")
 		private String deleted;
-		@Schema(description = "tbboardId", example="tbboardId")
+		@Schema(description = "bkboardId", example="bkboardId")
 		@Size(max=100)
-		private String tbboardId;
+		private String bkboardId;
 		@Schema(description = "content", example="content")
 		@Size(max=200)
 		private String content;
@@ -103,12 +103,12 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicSelectDto {
+	public static class BkpicSelectDto {
 
 		@Schema(description = "id", example="id")
 		private String id;
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "type", example="type")
@@ -128,9 +128,9 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicListDto {
-		@Schema(description = "tbboard_id", example="tbboardId")
-		private String tbboard_id;
+	public static class BkpicListDto {
+		@Schema(description = "bkboard_id", example="bkboardId")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "type", example="type")
@@ -144,9 +144,9 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicPagedListDto extends CommonPagedListDto {
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+	public static class BkpicPagedListDto extends CommonPagedListDto {
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "type", example="type")
@@ -159,9 +159,9 @@ public class TbpicDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbpicMoreListDto extends CommonMoreListDto {
-		@Schema(description = "tbboard_id", example="tbboard_id")
-		private String tbboard_id;
+	public static class BkpicMoreListDto extends CommonMoreListDto {
+		@Schema(description = "bkboard_id", example="bkboard_id")
+		private String bkboard_id;
 		@Schema(description = "content", example="content")
 		private String content;
 		@Schema(description = "type", example="type")

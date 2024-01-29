@@ -1,4 +1,4 @@
-package com.thc.sprapi.interceptor;
+package com.eunho.bankingsystem_spring_v2.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

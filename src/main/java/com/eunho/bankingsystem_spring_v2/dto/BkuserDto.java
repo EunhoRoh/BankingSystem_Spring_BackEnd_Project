@@ -1,15 +1,14 @@
-package com.thc.sprapi.dto;
+package com.eunho.bankingsystem_spring_v2.dto;
 
-import com.thc.sprapi.domain.Tbuser;
+import com.eunho.bankingsystem_spring_v2.domain.Bkuser;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-public class TbuserDto {
+public class BkuserDto {
 	
 	@Schema
 	@Builder
@@ -17,7 +16,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserCreateDto {
+	public static class BkuserCreateDto {
 		@Schema(description = "uid", example="이메일 주소")
 		@NotNull
 		@Email
@@ -43,8 +42,8 @@ public class TbuserDto {
 		@Size(max=50)
 		private String sfrom;
 
-		public Tbuser toEntity() {
-			return Tbuser.of(uid, pw, nick, sfrom, "0");
+		public Bkuser toEntity() {
+			return Bkuser.of(uid, pw, nick, sfrom, "0");
 		}
 	}
 	@Schema
@@ -53,7 +52,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserAfterCreateDto {
+	public static class BkuserAfterCreateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 	}
@@ -64,7 +63,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserUpdateDto {
+	public static class BkuserUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		@NotNull
 		@NotEmpty
@@ -103,7 +102,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserAfterUpdateDto {
+	public static class BkuserAfterUpdateDto {
 		@Schema(description = "id", example="length32textnumber")
 		private String id;
 		@Schema(description = "deleted", example="Y")
@@ -116,7 +115,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserSelectDto {
+	public static class BkuserSelectDto {
 
 		@Schema(description = "id", example="id")
 		private String id;
@@ -151,7 +150,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserListDto {
+	public static class BkuserListDto {
 		@Schema(description = "E-mail(id)", example="id")
 		private String uid;
 		@Schema(description = "닉네임", example="1234")
@@ -171,7 +170,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserPagedListDto extends CommonPagedListDto {
+	public static class BkuserPagedListDto extends CommonPagedListDto {
 		@Schema(description = "E-mail(id)", example="id")
 		private String uid;
 		@Schema(description = "닉네임", example="1234")
@@ -190,7 +189,7 @@ public class TbuserDto {
 	@Setter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class TbuserMoreListDto extends CommonMoreListDto {
+	public static class BkuserMoreListDto extends CommonMoreListDto {
 		@Schema(description = "E-mail(id)", example="id")
 		private String uid;
 		@Schema(description = "닉네임", example="1234")

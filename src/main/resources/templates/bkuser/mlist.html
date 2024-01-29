@@ -44,13 +44,13 @@
 <div>
     =========================================
 </div>
-<div id="tbody_tbuser_list">
+<div id="bkody_bkuser_list">
 </div>
 
 
-<a onclick="search_tbuser()">더보기</a>
+<a onclick="search_bkuser()">더보기</a>
 <script>
-    function search_tbuser(){
+    function search_bkuser(){
         let search_cway = $("#search_cway").val() + "";
         let cdatetime = "";
         if(search_cway == "recent"){
@@ -65,12 +65,12 @@
             cdatetime = "";
             $("#search_sdatetime").val("");
             $("#search_fdatetime").val("");
-            $("#tbody_tbuser_list").html("");
+            $("#bkody_bkuser_list").html("");
             $("#input_keyword_changed").val("0");
         }
 
         $.ajax({
-            url: "/api/tbuser/moreList",
+            url: "/api/bkuser/moreList",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({
@@ -105,11 +105,11 @@
                     }
 
                     if(search_cway == "recent"){
-                        $("#tbody_tbuser_list").prepend(
+                        $("#bkody_bkuser_list").prepend(
                             "<div>" + this_created_at + "//" + JSON.stringify(tlist[i].id) + "//" + JSON.stringify(tlist[i].title)   +"</div>"
                         );
                     } else {
-                        $("#tbody_tbuser_list").append(
+                        $("#bkody_bkuser_list").append(
                             "<div>" + this_created_at + "//" + JSON.stringify(tlist[i].id) + "//" + JSON.stringify(tlist[i].title)   +"</div>"
                         );
                     }

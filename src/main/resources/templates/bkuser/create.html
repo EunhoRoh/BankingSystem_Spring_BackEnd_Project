@@ -15,11 +15,11 @@
 =========================================
 </div>
 
-<a onclick="create_tbuser()">write</a>
+<a onclick="create_bkuser()">write</a>
 <script>
-    function create_tbuser(){
+    function create_bkuser(){
         $.ajax({
-            url: "/api/tbuser",
+            url: "/api/bkuser",
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             data: JSON.stringify({

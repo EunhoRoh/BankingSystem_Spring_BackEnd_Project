@@ -1,7 +1,7 @@
-package com.thc.sprapi.repository;
+package com.eunho.bankingsystem_spring_v2.repository;
 
-import com.thc.sprapi.domain.Tbpic;
+import com.eunho.bankingsystem_spring_v2.domain.Bkpic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TbpicRepository extends JpaRepository<Tbpic, String> {
+public interface BkpicRepository extends JpaRepository<Bkpic, String> {
 }

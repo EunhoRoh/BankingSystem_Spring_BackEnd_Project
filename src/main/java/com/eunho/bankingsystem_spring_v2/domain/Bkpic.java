@@ -1,6 +1,6 @@
-package com.thc.sprapi.domain;
+package com.eunho.bankingsystem_spring_v2.domain;
 
-import com.thc.sprapi.dto.TbpicDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkpicDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
@@ -12,42 +12,42 @@ import lombok.ToString;
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
-        @Index(columnList = "tbboardId")
+        @Index(columnList = "bkboardId")
         ,@Index(columnList = "createdAt")
         ,@Index(columnList = "modifiedAt")
 })
 @Entity
-public class Tbpic extends AuditingFields {
+public class Bkpic extends AuditingFields {
 
-    @Setter @Column(nullable = false) private String tbboardId; // 게시판의 pk
+    @Setter @Column(nullable = false) private String bkboardId; // 게시판의 pk
     @Setter @Column(nullable = false, length = 10000) private String content;
     @Setter @Column(nullable = false) private String type;
 
-    protected Tbpic(){}
-    private Tbpic(String tbboardId, String content, String type) {
-        this.tbboardId = tbboardId;
+    protected Bkpic(){}
+    private Bkpic(String bkboardId, String content, String type) {
+        this.bkboardId = bkboardId;
         this.content = content;
         this.type = type;
     }
-    public static Tbpic of(String tbboardId, String content, String type) {
-        return new Tbpic(tbboardId, content, type);
+    public static Bkpic of(String bkboardId, String content, String type) {
+        return new Bkpic(bkboardId, content, type);
     }
     /*
-    public static Tbpic of(String tbboardId) {
-        return new Tbpic(tbboardId, "", "");
+    public static Bkpic of(String bkboardId) {
+        return new Bkpic(bkboardId, "", "");
     }
      */
 
-    public TbpicDto.TbpicAfterCreateDto toAfterCreateDto() {
-        return TbpicDto.TbpicAfterCreateDto.builder()
+    public BkpicDto.BkpicAfterCreateDto toAfterCreateDto() {
+        return BkpicDto.BkpicAfterCreateDto.builder()
                 .id(super.getId())
                 .build();
     }
-    public TbpicDto.TbpicAfterUpdateDto toAfterUpdateDto() {
-        return TbpicDto.TbpicAfterUpdateDto.builder()
+    public BkpicDto.BkpicAfterUpdateDto toAfterUpdateDto() {
+        return BkpicDto.BkpicAfterUpdateDto.builder()
                 .id(super.getId())
                 .deleted(super.getDeleted())
-                .tbboardId(getTbboardId())
+                .bkboardId(getBkboardId())
                 .content(getContent())
                 .type(getType())
                 .build();

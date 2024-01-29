@@ -1,12 +1,12 @@
-package com.thc.sprapi.service.impl;
+package com.eunho.bankingsystem_spring_v2.service.impl;
 
-import com.thc.sprapi.domain.Tbpic;
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbpicDto;
-import com.thc.sprapi.exception.NoMatchingDataException;
-import com.thc.sprapi.mapper.TbpicMapper;
-import com.thc.sprapi.repository.TbpicRepository;
-import com.thc.sprapi.service.TbpicService;
+import com.eunho.bankingsystem_spring_v2.domain.Bkpic;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkpicDto;
+import com.eunho.bankingsystem_spring_v2.exception.NoMatchingDataException;
+import com.eunho.bankingsystem_spring_v2.mapper.BkpicMapper;
+import com.eunho.bankingsystem_spring_v2.repository.BkpicRepository;
+import com.eunho.bankingsystem_spring_v2.service.BkpicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,55 +14,55 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TbpicServiceImpl implements TbpicService {
+public class BkpicServiceImpl implements BkpicService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final TbpicRepository tbpicRepository;
-    private final TbpicMapper tbpicMapper;
-    public TbpicServiceImpl(
-            TbpicRepository tbpicRepository
-            ,TbpicMapper tbpicMapper
+    private final BkpicRepository bkpicRepository;
+    private final BkpicMapper bkpicMapper;
+    public BkpicServiceImpl(
+            BkpicRepository bkpicRepository
+            ,BkpicMapper bkpicMapper
     ) {
-        this.tbpicRepository = tbpicRepository;
-        this.tbpicMapper = tbpicMapper;
+        this.bkpicRepository = bkpicRepository;
+        this.bkpicMapper = bkpicMapper;
     }
 
-    public TbpicDto.TbpicAfterCreateDto create(TbpicDto.TbpicCreateDto params){
-        return tbpicRepository.save(params.toEntity()).toAfterCreateDto();
+    public BkpicDto.BkpicAfterCreateDto create(BkpicDto.BkpicCreateDto params){
+        return bkpicRepository.save(params.toEntity()).toAfterCreateDto();
     }
-    public TbpicDto.TbpicAfterUpdateDto update(TbpicDto.TbpicUpdateDto params){
-        Tbpic tbpic = tbpicRepository.findById(params.getId())
+    public BkpicDto.BkpicAfterUpdateDto update(BkpicDto.BkpicUpdateDto params){
+        Bkpic bkpic = bkpicRepository.findById(params.getId())
                 .orElseThrow(() -> new NoMatchingDataException(""));
-        if(params.getTbboardId() != null){
-            tbpic.setTbboardId(params.getTbboardId());
+        if(params.getBkboardId() != null){
+            bkpic.setBkboardId(params.getBkboardId());
         }
         if(params.getContent() != null){
-            tbpic.setContent(params.getContent());
+            bkpic.setContent(params.getContent());
         }
         if(params.getDeleted() != null){
-            tbpic.setDeleted(params.getDeleted());
+            bkpic.setDeleted(params.getDeleted());
         }
-        tbpicRepository.save(tbpic);
-        return tbpic.toAfterUpdateDto();
+        bkpicRepository.save(bkpic);
+        return bkpic.toAfterUpdateDto();
     }
-    public TbpicDto.TbpicAfterUpdateDto delete(TbpicDto.TbpicUpdateDto params){
+    public BkpicDto.BkpicAfterUpdateDto delete(BkpicDto.BkpicUpdateDto params){
         params.setDeleted("Y");
         return update(params);
     }
 
-    public TbpicDto.TbpicSelectDto detail(String id){
-        return tbpicMapper.detail(id);
+    public BkpicDto.BkpicSelectDto detail(String id){
+        return bkpicMapper.detail(id);
     }
-    public List<TbpicDto.TbpicSelectDto> list(TbpicDto.TbpicListDto params){
-        return tbpicMapper.list(params);
+    public List<BkpicDto.BkpicSelectDto> list(BkpicDto.BkpicListDto params){
+        return bkpicMapper.list(params);
     }
-    public List<TbpicDto.TbpicSelectDto> moreList(TbpicDto.TbpicMoreListDto params){
+    public List<BkpicDto.BkpicSelectDto> moreList(BkpicDto.BkpicMoreListDto params){
         params.afterBuild();
-        return tbpicMapper.moreList(params);
+        return bkpicMapper.moreList(params);
     }
-    public CommonAfterPagedListDto<TbpicDto.TbpicSelectDto> pagedList(TbpicDto.TbpicPagedListDto params){
-        return new CommonAfterPagedListDto<>(params.afterBuild(tbpicMapper.pagedListCount(params)), tbpicMapper.pagedList(params));
+    public CommonAfterPagedListDto<BkpicDto.BkpicSelectDto> pagedList(BkpicDto.BkpicPagedListDto params){
+        return new CommonAfterPagedListDto<>(params.afterBuild(bkpicMapper.pagedListCount(params)), bkpicMapper.pagedList(params));
     }
 
 }

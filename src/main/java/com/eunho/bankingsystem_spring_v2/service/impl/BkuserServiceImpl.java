@@ -1,82 +1,81 @@
-package com.thc.sprapi.service.impl;
+package com.eunho.bankingsystem_spring_v2.service.impl;
 
-import com.thc.sprapi.domain.Tbuser;
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbuserDto;
-import com.thc.sprapi.exception.NoMatchingDataException;
-import com.thc.sprapi.mapper.TbuserMapper;
-import com.thc.sprapi.repository.TbuserRepository;
-import com.thc.sprapi.service.TbuserService;
+import com.eunho.bankingsystem_spring_v2.domain.Bkuser;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkuserDto;
+import com.eunho.bankingsystem_spring_v2.exception.NoMatchingDataException;
+import com.eunho.bankingsystem_spring_v2.mapper.BkuserMapper;
+import com.eunho.bankingsystem_spring_v2.repository.BkuserRepository;
+import com.eunho.bankingsystem_spring_v2.service.BkuserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class TbuserServiceImpl implements TbuserService {
+public class BkuserServiceImpl implements BkuserService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final TbuserRepository tbuserRepository;
-    private final TbuserMapper tbuserMapper;
-    public TbuserServiceImpl(
-            TbuserRepository tbuserRepository
-            ,TbuserMapper tbuserMapper
+    private final BkuserRepository bkuserRepository;
+    private final BkuserMapper bkuserMapper;
+    public BkuserServiceImpl(
+            BkuserRepository bkuserRepository
+            ,BkuserMapper bkuserMapper
     ) {
-        this.tbuserRepository = tbuserRepository;
-        this.tbuserMapper = tbuserMapper;
+        this.bkuserRepository = bkuserRepository;
+        this.bkuserMapper = bkuserMapper;
     }
 
     /**/
 
-    public TbuserDto.TbuserAfterCreateDto create(TbuserDto.TbuserCreateDto params){
-        return tbuserRepository.save(params.toEntity()).toAfterCreateDto();
+    public BkuserDto.BkuserAfterCreateDto create(BkuserDto.BkuserCreateDto params){
+        return bkuserRepository.save(params.toEntity()).toAfterCreateDto();
     }
-    public TbuserDto.TbuserAfterUpdateDto update(TbuserDto.TbuserUpdateDto params){
-        Tbuser tbuser = tbuserRepository.findById(params.getId())
+    public BkuserDto.BkuserAfterUpdateDto update(BkuserDto.BkuserUpdateDto params){
+        Bkuser bkuser = bkuserRepository.findById(params.getId())
                 .orElseThrow(() -> new NoMatchingDataException(""));
         if(params.getPassword() != null){
-            tbuser.setPassword(params.getPassword());
+            bkuser.setPassword(params.getPassword());
         }
         if(params.getNick() != null){
-            tbuser.setNick(params.getNick());
+            bkuser.setNick(params.getNick());
         }
         if(params.getSfrom() != null){
-            tbuser.setSfrom(params.getSfrom());
+            bkuser.setSfrom(params.getSfrom());
         }
         if(params.getDeleted() != null){
-            tbuser.setDeleted(params.getDeleted());
+            bkuser.setDeleted(params.getDeleted());
         }
         if(params.getProcess() != null){
-            tbuser.setProcess(params.getProcess());
+            bkuser.setProcess(params.getProcess());
         }
         if(params.getName() != null){
-            tbuser.setName(params.getName());
+            bkuser.setName(params.getName());
         }
         if(params.getPhone() != null){
-            tbuser.setPhone(params.getPhone());
+            bkuser.setPhone(params.getPhone());
         }
         if(params.getMpic() != null){
-            tbuser.setMpic(params.getMpic());
+            bkuser.setMpic(params.getMpic());
         }
-        tbuserRepository.save(tbuser);
-        return tbuser.toAfterUpdateDto();
+        bkuserRepository.save(bkuser);
+        return bkuser.toAfterUpdateDto();
     }
 
-    public TbuserDto.TbuserSelectDto detail(String id){
-        return tbuserMapper.detail(id);
+    public BkuserDto.BkuserSelectDto detail(String id){
+        return bkuserMapper.detail(id);
     }
-    public List<TbuserDto.TbuserSelectDto> list(TbuserDto.TbuserListDto params){
-        return tbuserMapper.list(params);
+    public List<BkuserDto.BkuserSelectDto> list(BkuserDto.BkuserListDto params){
+        return bkuserMapper.list(params);
     }
-    public List<TbuserDto.TbuserSelectDto> moreList(TbuserDto.TbuserMoreListDto params){
+    public List<BkuserDto.BkuserSelectDto> moreList(BkuserDto.BkuserMoreListDto params){
         params.afterBuild();
-        return tbuserMapper.moreList(params);
+        return bkuserMapper.moreList(params);
     }
-    public CommonAfterPagedListDto<TbuserDto.TbuserSelectDto> pagedList(TbuserDto.TbuserPagedListDto params){
-        return new CommonAfterPagedListDto<>(params.afterBuild(tbuserMapper.pagedListCount(params)), tbuserMapper.pagedList(params));
+    public CommonAfterPagedListDto<BkuserDto.BkuserSelectDto> pagedList(BkuserDto.BkuserPagedListDto params){
+        return new CommonAfterPagedListDto<>(params.afterBuild(bkuserMapper.pagedListCount(params)), bkuserMapper.pagedList(params));
     }
 
 }

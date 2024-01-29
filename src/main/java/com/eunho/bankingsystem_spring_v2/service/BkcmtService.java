@@ -1,15 +1,15 @@
-package com.thc.sprapi.service;
+package com.eunho.bankingsystem_spring_v2.service;
 
-import com.thc.sprapi.dto.CommonAfterPagedListDto;
-import com.thc.sprapi.dto.TbcmtDto;
+import com.eunho.bankingsystem_spring_v2.dto.CommonAfterPagedListDto;
+import com.eunho.bankingsystem_spring_v2.dto.BkcmtDto;
 
 import java.util.List;
 
-public interface TbcmtService {
-    public TbcmtDto.TbcmtAfterCreateDto create(TbcmtDto.TbcmtCreateDto params);
-    public TbcmtDto.TbcmtAfterUpdateDto update(TbcmtDto.TbcmtUpdateDto params);
-    public TbcmtDto.TbcmtSelectDto detail(String id);
-    public List<TbcmtDto.TbcmtSelectDto> list(TbcmtDto.TbcmtListDto params);
-    public List<TbcmtDto.TbcmtSelectDto> moreList(TbcmtDto.TbcmtMoreListDto params);
-    public CommonAfterPagedListDto<TbcmtDto.TbcmtSelectDto> pagedList(TbcmtDto.TbcmtPagedListDto params);
+public interface BkcmtService {
+    public BkcmtDto.BkcmtAfterCreateDto create(BkcmtDto.BkcmtCreateDto params);
+    public BkcmtDto.BkcmtAfterUpdateDto update(BkcmtDto.BkcmtUpdateDto params);
+    public BkcmtDto.BkcmtSelectDto detail(String id);
+    public List<BkcmtDto.BkcmtSelectDto> list(BkcmtDto.BkcmtListDto params);
+    public List<BkcmtDto.BkcmtSelectDto> moreList(BkcmtDto.BkcmtMoreListDto params);
+    public CommonAfterPagedListDto<BkcmtDto.BkcmtSelectDto> pagedList(BkcmtDto.BkcmtPagedListDto params);
 }
