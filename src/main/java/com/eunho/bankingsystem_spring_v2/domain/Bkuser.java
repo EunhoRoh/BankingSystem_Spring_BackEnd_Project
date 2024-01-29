@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Bkuser extends AuditingFields {
 
     @Setter @Column(nullable = false) private String uid;
-    @Setter @Column(nullable = false) private String pw;
+    @Setter @Column(nullable = false) private String password;
     @Setter @Column(nullable = false) private String nick;
     @Setter @Column(nullable = false) private String sfrom;
     @Setter @Column(nullable = false) private String process;
@@ -34,7 +34,7 @@ public class Bkuser extends AuditingFields {
     protected Bkuser(){}
     private Bkuser(String uid, String pw, String nick, String sfrom, String process) {
         this.uid = uid;
-        this.pw = pw;
+        this.password = pw;
         this.nick = nick;
         this.sfrom = sfrom;
         this.process = process;

@@ -72,7 +72,7 @@ public class BkuserDto {
 
 		@Schema(description = "비밀번호", example="abcd1234!")
 		@Size(max=20)
-		private String pw;
+		private String password;
 		@Schema(description = "닉네임", example="1234")
 		@Size(max=20)
 		private String nick;
